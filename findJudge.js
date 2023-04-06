@@ -32,6 +32,15 @@ Constraints:
     ai != bi
     1 <= ai, bi <= n
 **/
-let findJudge = function(n, trust) {
-    
+let findJudge = function (n, trust) {
+  if (n === 1 && trust.length === 0) return 1; //edge case
+  let count = new Array(n + 1).fill(0); ///count array with n+1 elements filled with 0
+  for (let i = 0; i < trust.length; i++) {
+    count[trust[i][0]]--; //decrement the count of the person who trusts
+    count[trust[i][1]]++; //increment the count of the person who is trusted
+  }
+  for (let j = 0; j < count.length; j++) {
+    if (count[j] === n - 1) return j; //if the count of the person who is trusted is n-1, then he is the judge
+  }
+  return -1; //judge not found
 };
