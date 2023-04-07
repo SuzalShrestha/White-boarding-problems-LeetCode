@@ -23,3 +23,16 @@ Constraints:
     All pairs (fromi, toi) are distinct.
 
 */
+var findSmallestSetOfVertices = function (n, edges) {
+  let result = new Set();
+  let outgoing = new Set();
+  for (let array of edges) {
+    outgoing.add(array[1]);
+  }
+  for (let array of edges) {
+    if (!outgoing.has(array[0]) && !result.has(array[0])) {
+      result.add(array[0]);
+    }
+  }
+  return Array.from(result);
+};
